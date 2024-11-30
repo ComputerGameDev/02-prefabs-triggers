@@ -1,31 +1,44 @@
 ﻿using UnityEngine;
 
-/**
- * This component spawns the given laser-prefab whenever the player clicks a given key.
- * It also updates the "scoreText" field of the new laser.
- */
-public class LaserShooter: ClickSpawner {
+public class LaserShooter : ClickSpawner
+{
     [SerializeField]
-    [Tooltip("How many points to add to the shooter, if the laser hits its target")]
-    int pointsToAdd = 1;
+    [Tooltip("How many points to add to the shooter, if the laser hits its target.")]
+    private int pointsToAdd = 1;
 
-    // A reference to the field that holds the score that has to be updated when the laser hits its target.
-    NumberField scoreField;  
+    private NumberField scoreField;  // Reference to the score text field
+    private bool canShoot = true;   // Controls whether the player can shoot
 
-    private void Start() {
+    private void Start()
+    {
+        // Find the NumberField component in children
         scoreField = GetComponentInChildren<NumberField>();
         if (!scoreField)
+        {
             Debug.LogError($"No child of {gameObject.name} has a NumberField component!");
+        }
     }
 
-    protected override GameObject spawnObject() {
-        GameObject newObject = base.spawnObject();  // base = super
-
-        // Modify the text field of the new object.
-        ScoreAdder newObjectScoreAdder = newObject.GetComponent<ScoreAdder>();
-        if (newObjectScoreAdder)
-            newObjectScoreAdder.SetScoreField(scoreField).SetPointsToAdd(pointsToAdd);
-
-        return newObject;
+    private void Update()
+    {
+        // Allow shooting only if canShoot is true
+        if (canShoot && spawnAction.WasPressedThisFrame())
+        {
+            spawnObject();
+        }
     }
+
+public void SetShootingEnabled(bool enabled)
+{
+    if (this == null || !gameObject.activeInHierarchy)
+    {
+        Debug.LogWarning($"{gameObject.name}: Attempted to set shooting state, but object is inactive or destroyed.");
+        return;
+    }
+
+    canShoot = enabled;
+    Debug.Log($"{gameObject.name}: Shooting set to {enabled} (canShoot = {canShoot})");
+}
+
+
 }
