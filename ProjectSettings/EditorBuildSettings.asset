@@ -8,20 +8,35 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/4-levels/level-1.unity
     guid: 7b9c106c66bcfde438f75b0322428201
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/4-levels/level-game-over.unity
     guid: 746da71bf020a504bb92b7b3fd74cf3e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/4-levels/level-win.unity
     guid: efbda32608f8719439866184c08cd90d
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/2-prefabs/b-instantiate.unity
     guid: 2e934fb2f71798c4caddce2e03fed046
   - enabled: 0
     path: Assets/Scenes/3-triggers/d-shield.unity
     guid: a031f83008145b54f8dc3a8abfc50099
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/4-levels/level-2.unity
     guid: d3d37355d15a0f449a03a97787a0fd28
+  - enabled: 1
+    path: Assets/Scenes/1-base/movement-and-control.unity
+    guid: fd179c52dfc6645468b285fa39d73677
+  - enabled: 1
+    path: Assets/Scenes/3-triggers/f-healthbar.unity
+    guid: 61ae52799ab92473e859b715634a732b
+  - enabled: 1
+    path: Assets/Scenes/3-triggers/b-trigger-destruction.unity
+    guid: 33623bd7f65a8184caf0df1ff3d8b7a9
+  - enabled: 1
+    path: Assets/Scenes/3-triggers/a-collision-logger.unity
+    guid: 1ec44b468329a7747ad7e3e2d2f95537
+  - enabled: 1
+    path: Assets/Scenes/3-triggers/e-disableshooting.unity
+    guid: 50fd1e7c9ab6e47deb0ef00ab9f571b6
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
