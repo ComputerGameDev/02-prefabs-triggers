@@ -173,6 +173,16 @@ public class ShootDisableTrigger : MonoBehaviour
     }
 }
 ```
+## התרשמות מהפרויקט
+
+### הדגמה למערכת החיים ולעולם העגול
+ניתן להתרשם מהמשחק באתר **itch.io** בקישור הבא:
+[לחץ כאן להדגמה](https://tomgoz.itch.io/spaceshipgame)
+
+### הדגמה לשלילת היכולת לירות
+ניתן לצפות בהדגמה של מנגנון שלילת היכולת לירות בקישור הבא ל-Google Drive:
+[לחץ כאן להדגמה](https://drive.google.com/file/d/1vlTeWVIcl13rdKJ1-2a2-GAXjSf5w_lh/view?usp=sharing)
+
 
 
 
