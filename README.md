@@ -22,7 +22,7 @@ else if (transform.position.x > screenRight)
 {
     transform.position = new Vector3(screenLeft, transform.position.y, transform.position.z);
 }
-```csharp
+```
 ---
 
 ### עולם עגול בציר האנכי
