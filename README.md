@@ -32,7 +32,7 @@ else if (transform.position.x > screenRight)
 ```csharp
 float newY = Mathf.Clamp(transform.position.y + movementVector.y, screenBottom, screenTop);
 transform.position = new Vector3(transform.position.x + movementVector.x, newY, transform.position.z);
-```csharp
+```
 
 
 
