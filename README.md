@@ -115,15 +115,64 @@ public class HealthWhenDestroy : MonoBehaviour {
 
 ---
 
-### הקשרים בין הסקריפטים
-- **`Health`**:
-  - מנהל את מצב הבריאות ומציג אותו באמצעות סמלי לבבות.
-- **`HealthWhenDestroy`**:
-  - מפחית בריאות בעקבות פגיעות ומתקשר ישירות למשתנה הסטטי `Health.health` כדי לעדכן את המצב.
+## שלילת היכולת של הספינה לירות למשך 5 שניות
 
---.
+במערכת זו, הספינה מאבדת את היכולת לירות למשך 5 שניות כתוצאה מאירוע מסוים (איסוף פריט). הלוגיקה מתבצעת על ידי ניהול משתנה שמונע מהשחקן לירות במהלך זמן זה.
 
----
+
+### לוגיקת הסקריפט
+- **ביטול זמני של ירי**: אם נמצאה קומפוננטת `LaserShooter`, היכולת לירות מושבתת למשך הזמן שהוגדר (ברירת מחדל: 5 שניות).
+- **הרצת Coroutine**: הסקריפט משתמש ב-Coroutine כדי להשהות את היכולת לירות למשך הזמן המוגדר, ולאחר מכן מחזיר את היכולת.
+- **השמדה עצמית**: לאחר שהטריגר מופעל, האובייקט המכיל את `ShootDisableTrigger` מושמד.
+
+### קוד:
+```csharp
+using System.Collections;
+using UnityEngine;
+
+public class ShootDisableTrigger : MonoBehaviour
+{
+    [Tooltip("How many seconds to disable shooting for.")]
+    [SerializeField] private float disableShootingDuration = 5f;
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log($"ShootDisableTrigger triggered by {other.name}");
+
+            LaserShooter laserShooter = other.GetComponent<LaserShooter>();
+            if (laserShooter != null)
+            {
+                // Use a persistent CoroutineRunner to handle the coroutine
+                CoroutineRunner.Instance.StartCoroutine(DisableShootingForDuration(laserShooter));
+            }
+            else
+            {
+                Debug.LogWarning($"LaserShooter component not found on {other.name}");
+            }
+
+            // Destroy the icon immediately after the collision
+            Destroy(gameObject);
+        }
+        else
+        {
+            Debug.Log($"ShootDisableTrigger triggered by non-player object: {other.name}");
+        }
+    }
+
+    private IEnumerator DisableShootingForDuration(LaserShooter laserShooter)
+    {
+        laserShooter.SetShootingEnabled(false);
+        Debug.Log($"Shooting disabled for {laserShooter.name} for {disableShootingDuration} seconds!");
+
+        yield return new WaitForSeconds(disableShootingDuration);
+
+        laserShooter.SetShootingEnabled(true);
+        Debug.Log($"Shooting re-enabled for {laserShooter.name} after {disableShootingDuration} seconds.");
+    }
+}
+```
 
 
 
